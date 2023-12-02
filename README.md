@@ -32,7 +32,7 @@ To run the app locally, follow these steps:
     ```bash
    npm install
 
-4.Start the app the app will run on port 3000:\
+4. Start the app the app will run on port 3000:
 
     ```bash
     npm start
