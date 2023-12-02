@@ -20,4 +20,14 @@ To run the app locally, follow these steps:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/your-repo.git
+   git clone https://github.com/GaneshYadav3142/betalectic_Package_Manager_App.git
+
+   ```bash
+   cd myapp
+
+   ```bash
+   npm install
+
+   ```bash
+   npm start
+
