@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { HamburgerIcon} from '@chakra-ui/icons'
-import "./Navbar.css"
+import "../Styles/Navbar.css"
 export const Navbar = () => {
     const [isResponsive, setResponsive] = useState(false);
 

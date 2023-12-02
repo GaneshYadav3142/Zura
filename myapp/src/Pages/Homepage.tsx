@@ -4,6 +4,9 @@ export const Homepage:React.FC = () => {
     
     const [data,setData]=useState<any>([])
     const [query,setQuery]=useState<string>("")
+    const [selectedPackage, setSelectedPackage] = useState<string | null>(null);
+    const [description, setDescription] = useState<string>('');
+    const [formError, setFormError] = useState<string | null>(null);
 
     const fetchQuery=async (query:string)=>{
         let api
@@ -29,6 +32,51 @@ export const Homepage:React.FC = () => {
      },[query])
   
 
+     const handleRadioSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setSelectedPackage(e.target.value);
+      setFormError(null);
+    };
+  
+    const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+      setDescription(e.target.value);
+      setFormError(null);
+    };
+
+
+    const handleAddToFavorites = () => {
+      if (!selectedPackage) {
+        setFormError('Please select a package.');
+      } else if (description.trim() === '') {
+        setFormError('Please enter a description.');
+      } else {
+        const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+        const isItemPresent = favorites.some(
+          (item: { itemName: string }) => item.itemName === selectedPackage
+        );
+  
+        if (isItemPresent) {
+          // Show alert if the item is already present
+          alert('Item already present in favorites.');
+        } else {
+          // Add to localStorage
+          const favoriteItem = {
+            itemName: selectedPackage,
+            description,
+          };
+          favorites.push(favoriteItem);
+          localStorage.setItem('favorites', JSON.stringify(favorites));
+  
+          // Additional logic if needed
+  
+          // Reset state
+          setSelectedPackage(null);
+          setDescription('');
+          setFormError(null);
+          alert("item Added succefully")
+        }
+      }
+    }
+  
   return (
     <div className="p-4 mx-auto max-w-screen-lg">
       {/* Search Input */}
@@ -39,6 +87,7 @@ export const Homepage:React.FC = () => {
         <input
           type="text"
           id="search"
+          placeholder="e.g. react"
           className="border rounded w-full py-2 px-3"
           required
           onChange={(e) => setQuery(e.target.value)}
@@ -54,7 +103,14 @@ export const Homepage:React.FC = () => {
           {data.length !== 0 &&
             data.map((el:any, i:number) => (
               <div key={i} className="mb-2 text-left">
-                <input type="radio" id={`radioOption${i}`} className="mr-2"  placeholder="e.g. react"/>
+                <input 
+                type="radio" 
+                value={el.package.name}
+                id={`radioOption${i}`} 
+                className="mr-2" 
+                onChange={handleRadioSelect}
+                checked={selectedPackage === el.package.name}
+                />
                 <label htmlFor={`radioOption${i}`}>{el.package.name}</label>
               </div>
             ))}
@@ -67,10 +123,14 @@ export const Homepage:React.FC = () => {
           Why is this your favourite?
         </label>
         <textarea
+        required
           className="border rounded w-full py-2 px-3 mb-2"
           placeholder="Enter description"
+          value={description}
+          onChange={handleTextareaChange}
         />
-        <button className="bg-blue-500 text-white py-2 px-4 rounded">
+        {formError && <p className="text-red-500 mb-2">{formError}</p>}
+        <button className="bg-blue-500 text-white py-2 px-4 rounded"   onClick={handleAddToFavorites}>
           Submit
         </button>
       </div>
