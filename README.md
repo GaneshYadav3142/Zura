@@ -22,12 +22,20 @@ To run the app locally, follow these steps:
    ```bash
    git clone https://github.com/GaneshYadav3142/betalectic_Package_Manager_App.git
 
+2. Move to myapp: 
    
+   ```bash
    cd myapp
 
- 
+3. Install Necessary Dependencies: 
+
+    ```bash
    npm install
 
- 
-   npm start
+4.Start the app the app will run on port 3000:\
+
+    ```bash
+    npm start
+    
+   
 
