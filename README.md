@@ -22,12 +22,12 @@ To run the app locally, follow these steps:
    ```bash
    git clone https://github.com/GaneshYadav3142/betalectic_Package_Manager_App.git
 
-   ```bash
+   
    cd myapp
 
-   ```bash
+ 
    npm install
 
-   ```bash
+ 
    npm start
 
