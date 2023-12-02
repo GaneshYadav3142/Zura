@@ -50,7 +50,7 @@ To run the app locally, follow these steps:
 ![Favourite Page](./myapp/src/Utils/FavoritePage.jpg)
 
 
-## App Funtionality
+## App Functionality
 
 1. These app is Fully Responsive to all Screens available:
 
